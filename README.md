@@ -24,7 +24,7 @@ Instead of doing this...
 function fnOne(input, callback) {
   fnTwo(input, (err, data) => {
     if (err) {
-      console.error("Error happened in asyncFuncOne");
+      console.error("Error happened in fnOne");
     }
     else {
       callback(data);
@@ -38,7 +38,7 @@ function fnOne * (input) {
   var data = fnTwo(input);
   
   if (data instanceof Error) {
-    console.error("Error happened in asyncFuncOne");
+    console.error("Error happened in fnOne");
   }
   else {
     return data;
@@ -158,4 +158,7 @@ However, **new Synchronator()** cannot fully replace **new Promise()** where you
 That's true and it's all fine with the keyword **async**, but I still don't like the presence of another keyword - **await**. Yes, even this is too much for me. That's why Synchronator adds all the special keywords for me. I only need to mark certain functions with **\***... and I'm thinking about removing this as well.
 
 # How fast it is?
-I was thinking, how fast is the execution of **\*** functions compared to async-await? In **/test** you can find 2 benchmarks - **benchmark-synchronator** and **benchmark-async**. On my PC Synchronator is about 2 times faster!
+I was thinking, how fast is the execution of **\*** functions compared to async-await? In **/test** you can find 2 benchmarks - **benchmark-synchronator** and **benchmark-async**. On my PC, Synchronator is about 2 times faster!
+
+# Does this work on the browser?
+In my production website I also use Synchronator on the broswer side. But to be honest, I think that I probably don't need it so much over there. Maybe for Ajax requests or something like that, but at the moment I don't have very much to show. I'm still experimenting.
