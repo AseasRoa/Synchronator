@@ -43,9 +43,7 @@ function fnOne * (input) {
 
 # How to install?
 
-```javascript
-npm install synchronator
-```
+```npm install synchronator```
 
 # How it works?
 
