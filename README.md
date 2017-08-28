@@ -15,7 +15,7 @@ Writing asynchronous code in NodeJS creates a mess. But in NodeJS we don't have 
 Yes, we can write fully synchronous code in NodeJS and still using asynchronous functions! And we don't need Promise or anything else that adds extra code. We can do that by translating out synchronous code into asynchronous in background.
 
 Instead of doing this...
-```
+```javascript
 function fnOne(input, callback) {
   fnTwo(input, (err, data) => {
     if (err) {
@@ -28,7 +28,7 @@ function fnOne(input, callback) {
 }
 ```
 We can do this...
-```
+```javascript
 function fnOne * (input) {
   var data = fnTwo(input);
   
@@ -43,7 +43,9 @@ function fnOne * (input) {
 
 # How to install?
 
-```npm install synchronator```
+``````javascript
+npm install synchronator
+```
 
 # How it works?
 
@@ -51,7 +53,7 @@ First of all, it doesn't work directly out of the box, some preparations are nee
 
 Let's start with an example that shows how everything works:
 
-```
+```javascript
 var Synchronator = require("synchronator")
 
 /**
@@ -92,7 +94,7 @@ fn2().then(function (result) {
 })
 ```
 This code magically works, but it is still ugly, because of these "Synchronator.runGenerator" and "yield" words in it. We can extract the fn1-fn2 part of this code and write it like this:
-```
+```javascript
 var fn1 = function*(time)
 {
 	var result = sleep(time)
