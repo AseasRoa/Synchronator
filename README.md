@@ -1,18 +1,23 @@
 # Synchronator - PHP-like synchronous code in NodeJS
 
+# Before you start
+I wrote this tool for my own custom framework and I'm happy with it, I currently use it in production. But I can't give any guarantees to other people. Use it at your own risk!
+
+This module is intended to be used in some kind of framework, it must be prepared before use. Then it allows you to require modules in pretty much the same way as you are doing it now in NodeJS, but these modules are executed through Synchronator. Bugs and problems are expected. Don't blame me if something doesn't work for you, but please tell me about it :)
+
 # A little bit of history
 
-When I decided to rewrite my project from PHP to NodeJS, I thought that converting some functions from synchronous to asynchronous would not be such a big deal, but I quickly realized that this is not the case. My PHP code was already ugly and I did not want to make it worse, so I decided to find a solution. I knew there were many ways to make JavaScript code to look more synchronous - Promise, Generators and all kind of modules - but neither of them makes the code 100% synchronous. I wanted 100% synchronous code, so I wrote this tool for me.
+When I decided to rewrite my project from PHP to NodeJS, I thought that converting some functions from synchronous to asynchronous would not be such a big deal, but I quickly realized that this is not the case. My PHP code was already ugly and I did not want to make it worse, so I decided to find a solution. I knew that there are many ways to make JavaScript code to look more synchronous - Promise, Generators and all kind of modules - but neither of them makes the code 100% synchronous. I wanted 100% synchronous code, just like in PHP, so I wrote this tool to do exactly that.
 
 I did this module for my custom NodeJS framework and it helps me a lot!
 
-By the way, Syncronator is Terminator for asynchronous code :D
+By the way, Syncronator means Terminator for asynchronous code :D
 
-# The problem in NodeJS
+# Do we really need asynchronous functions in NodeJS? Not really...
 
-Writing asynchronous code in NodeJS creates a mess. But in NodeJS we don't have the same kind of events like in JavaScript (in browsers). We don't use out mouse or keyboard to interact with NodeJS. We use asynchronous functions in NodeJS mostly to prevent it from blocking. We don't want to block the whole application while reading a file for example, but in PHP we are used to read a file in one row of code without having blocking issues. PHP is of course much more intuitive, but can we do the same in NodeJS?
+Writing asynchronous code in NodeJS creates a mess. But in NodeJS we don't have the same kind of events like in JavaScript (in browsers) - we don't use out mouse or keyboard to interact with NodeJS. We use asynchronous functions in NodeJS mostly to prevent JavaScript from blocking. For example, we can use **fs.readFileSync()** in NodeJS to read a file, but we don't want to block the whole application while doing that, right? After all, in PHP we are used to read a file in one row of code without any blocking issues.
 
-Yes, we can write fully synchronous code in NodeJS and still using asynchronous functions! And we don't need Promise or anything else that adds extra code. We can do that by translating out synchronous code into asynchronous in background.
+I can tell you now that we can write fully synchronous code in NodeJS and still using asynchronous functions! And we don't need Promise or anything else that still adds extra code that we don't like. We can do that by automatically translating out synchronous code into asynchronous in background.
 
 Instead of doing this...
 ```javascript
@@ -47,9 +52,11 @@ function fnOne * (input) {
 
 # How it works?
 
-First of all, it doesn't work directly out of the box, some preparations are needed. It is a pre-processor (or transpiler), similar to LESS, SASS or Stylus for CSS or Babel for JavaScript. The idea is that your original code needs to be turned to another code, which is then used in the project. Synchronator contains function to transform the input code into Synchronator-compatible code. It also contains function to run that code.
+First of all, Synchronator doesn't work directly out of the box, some preparations are needed. It is a pre-processor (or transpiler), similar to LESS, SASS or Stylus for CSS or Babel for JavaScript, or TypeScript for JavaScript. The idea is that your original code needs to be turned to another code, which is then executed.
 
-Let's start with an example that shows how everything works:
+Synchronator contains a function to transform the input synchronous code into output asynchronous code that then needs to be run with another Synchronator function.
+
+Let's start with an example that shows how everything works under the hood:
 
 ```javascript
 var Synchronator = require("synchronator")
@@ -91,23 +98,22 @@ fn2().then(function (result) {
 	console.log(result)
 })
 ```
-This code magically works, but it is still ugly, because of these "Synchronator.runGenerator" and "yield" words in it. We can extract the fn1-fn2 part of this code and write it like this:
+This code magically works, but it is still ugly, because of these **Synchronator.runGenerator** and **yield** words in it. Let's strip all the ugliness. Now we have this:
 ```javascript
 var fn1 = function*(time)
 {
-	var result = sleep(time)
+    var result = sleep(time)
 
-	return result
+    return result
 })
 
 var fn2 = function*()
 {
-	var result = fn1(1000)
+    var result = fn1(1000)
 
-	return result
+    return result
 })
 ```
 
-I decided to use the **\*** symbol to mark the synchronous functions. This symbol is normally used for Generator functions, so the IDE does not complain at all. In fact, all Synchronator functions are actually Generator functions in which the **yield** keyword is automatically added.
+See this **\*** symbol? Yes, in JavaScript this symbol turns the function into Generator, but here we are using the same symbol to mark our synchronous functions. This code wound not work properly in JavaScript, but if we somehow add the ugly stuff from the previous example, it will work. This is the idea - we can write beautiful code like that and let Synchronator deal with all the necessary ugliness in background.
 
-... to be continued...
