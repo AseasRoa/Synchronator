@@ -1,6 +1,6 @@
 {
 	"name": "synchronator",
-	"description" : "",
+	"description" : "Write PHP-like code in NodeJS",
 	"version" : "0.0.1",
 	"author" : {
 		"name" : "AseasRoa",
@@ -8,7 +8,8 @@
 	},
 	"keywords": [
 		"synchronous",
-		"syntax",
+		"async",
+		"await",
 		"php"
   ],
 	"repository" : {
