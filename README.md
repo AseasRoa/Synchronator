@@ -153,3 +153,9 @@ In functions marked with **\*** you can use Promise functions as well. In the ex
 Synchronator contains a function **Synchronator.runGenerator()** that is designed to take the Generator functions (from the transformed code) and process all the **yield** magic in them. In the standard JavaScript you should have Promise function right after each **yield** keyword, but here you can also have Synchronator functions (made with **new Synchronator()** instead of **new Promise()**). Not only that, but promises are actually much slower, because **new Synchronator()** is very lightweight analog of **new Promise()**.
 
 However, **new Synchronator()** cannot fully replace **new Promise()** where you just want to use promises, it is not a replacement for Promise!
+
+# You know that we can already use async-await, right?
+That's true and it's all fine with the keyword **async**, but I still don't like the presence of another keyword - **await**. Yes, even this is too much for me. That's why Synchronator adds all the special keywords for me. I only need to mark certain functions with **\***... and I'm thinking about removing this as well.
+
+# How fast it is?
+I was thinking, how fast is the execution of **\*** functions compared to async-await? In **/test** you can find 2 benchmarks - **benchmark-synchronator** and **benchmark-async**. On my PC Synchronator is about 2 times faster!
