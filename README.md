@@ -146,3 +146,10 @@ if (typeof module1 == "function")
 This is the **example-modules** example in **/test**. Try it!
 
 Now **module1.js** can contain that beautiful synchronous code. And if we use **require("./module2")** we can just automatically get the exports from module2.js.
+
+# new Synchronator() vs new Promise()
+In functions marked with **\*** you can use Promise functions as well. In the examples above you can see that **new Synchronator()** was used in the example **sleep** function, but it will work with **new Promise()** as well.
+
+Synchronator contains a function **Synchronator.runGenerator()** that is designed to take the Generator functions (from the transformed code) and process all the **yield** magic in them. In the standard JavaScript you should have Promise function right after each **yield** keyword, but here you can also have Synchronator functions (made with **new Synchronator()** instead of **new Promise()**). Not only that, but promises are actually much slower, because **new Synchronator()** is very lightweight analog of **new Promise()**.
+
+However, **new Synchronator()** cannot fully replace **new Promise()** where you just want to use promises, it is not a replacement for Promise!
