@@ -56,7 +56,7 @@ First of all, Synchronator doesn't work directly out of the box, some preparatio
 
 Synchronator contains a function to transform the input synchronous code into output asynchronous code that then needs to be run with another Synchronator function.
 
-Let's start with an example that shows how everything works under the hood:
+But let's start with an example that shows how everything works under the hood:
 
 ```javascript
 var Synchronator = require("synchronator")
@@ -98,6 +98,7 @@ fn2().then(function (result) {
 	console.log(result)
 })
 ```
+
 This code magically works, but it is still ugly, because of these **Synchronator.runGenerator** and **yield** words in it. Let's strip all the ugliness. Now we have this:
 ```javascript
 var fn1 = function*(time)
@@ -117,3 +118,31 @@ var fn2 = function*()
 
 See this **\*** symbol? Yes, in JavaScript this symbol turns the function into Generator, but here we are using the same symbol to mark our synchronous functions. This code wound not work properly in JavaScript, but if we somehow add the ugly stuff from the previous example, it will work. This is the idea - we can write beautiful code like that and let Synchronator deal with all the necessary ugliness in background.
 
+Now we can get this code, run it through **Synchronator.transform()** and get our asynchronous code. For this you can try the **example-transform** example in **/test**.
+
+Now we have pure Generator functions wrapped in some **Synchronator.runGenerator** stuff. This code needs to be executed somehow.
+
+# Here comes the modified **require()** function
+We are now talking for CommonJS modules. Synchronator comes with modified **require()** function that can be used to load modules in pretty much the same old way. But in addition, that **require()** function contains **Synchronator.transform()** in itself and the required modules are automatically handled by Synchronator.
+
+So, you can start with something like this:
+
+```javascript
+//== "Synchronator" is already put in "global" when the module is required
+require("synchronator")
+
+//== get the module using require() from Synchronator
+var module1 = Synchronator.require(__dirname + "/modules/module1.js")
+
+//== "module1" now contains a function that will return Synchronator object when we call it
+if (typeof module1 == "function")
+{
+	module1().then((value) =>
+	{
+		console.log(value)
+	})
+}
+```
+This is the **example-modules** example in **/test**. Try it!
+
+Now **module1.js** can contain that beautiful synchronous code. And if we use **require("./module2")** we can just automatically get the exports from module2.js.
