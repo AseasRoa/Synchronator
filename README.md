@@ -116,7 +116,7 @@ var fn2 = function*()
 })
 ```
 
-See this **\*** symbol? Yes, in JavaScript this symbol turns the function into Generator, but here we are using the same symbol to mark our synchronous functions. This code wound not work properly in JavaScript, but if we somehow add the ugly stuff from the previous example, it will work. This is the idea - we can write beautiful code like that and let Synchronator deal with all the necessary ugliness in background.
+See this **\*** symbol? Yes, in JavaScript this symbol turns the function into Generator, but here we are using the same symbol to mark our synchronous functions. This code would not work properly in JavaScript, but if we somehow add the ugly stuff from the previous example, it will work. This is the idea - we can write beautiful code like that and let Synchronator deal with all the necessary ugliness in background.
 
 Now we can get this code, run it through **Synchronator.transform()** and get our asynchronous code. For this you can try the **example-transform** example in **/test**.
 
