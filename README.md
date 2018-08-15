@@ -13,27 +13,27 @@ Because in NodeJS we don't really need to have asynchronous looking code. Yes, J
 Instead of doing this...
 ```javascript
 function fnOne(input, callback) {
-  fnTwo(input, (err, data) => {
-    if (err) {
-      console.error("Error happened in fnOne");
-    }
-    else {
-      callback(data);
-    }
-  })
+	fnTwo(input, (err, data) => {
+		if (err) {
+			console.error("Error happened in fnOne");
+		}
+		else {
+			callback(data);
+		}
+	})
 }
 ```
 We can do this...
 ```javascript
 function fnOne * (input) {
-  var data = fnTwo(input);
-  
-  if (data instanceof Error) {
-    console.error("Error happened in fnOne");
-  }
-  else {
-    return data;
-  }
+	var data = fnTwo(input);
+
+	if (data instanceof Error) {
+		console.error("Error happened in fnOne");
+	}
+	else {
+		return data;
+	}
 }
 ```
 
@@ -56,22 +56,22 @@ Let's see some example that shows how Synchronator works under the hood. This is
 ```javascript
 var fn1 = function*(time)
 {
-    var result = sleep(time)
+	var result = sleep(time)
 
-    return result
+	return result
 })
 
 var fn2 = function*()
 {
-    var result = fn1(1000)
+	var result = fn1(1000)
 
-    return result
+	return result
 })
 ```
 
 Now this is how it looks like after the transformation:
 
-```
+```javascript
 var sleep = function(time) {
 	return new Synchronator(function (resolve, reject) {
 		setTimeout(() => {resolve(time + "ms timed out")}, time)
@@ -143,7 +143,7 @@ As you can see, only those function with the **\*** symbol are touched. Any norm
 
 You need to load a module with Synchronator.require() and process the exports. A special "require()" function is injected into this module. When you do "require()" for another sub-module, it is injected in it as well. Unless the required module belongs to NodeJS of course.
 
-```
+```javascript
 // "Synchronator" is already put in the global scope when the module is required and because of that
 // "var Synchronator = " is not mandatory here, but we don't want to hurt someone's feelings
 var Synchronator = require("synchronator")
@@ -187,7 +187,7 @@ This is the **example-modules** example in **/examples**. Try it!
 # What about regular calback functions?
 Do them like that:
 
-```
+```javascript
 myCallBackFunction(myArgumentsList, (0));
 ```
 
