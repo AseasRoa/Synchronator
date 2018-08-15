@@ -1,4 +1,4 @@
-require("synchronator")
+const Synchronator = require("synchronator")
 
 var code = `
 var fn1 = function*(time)

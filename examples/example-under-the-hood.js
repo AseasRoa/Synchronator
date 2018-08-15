@@ -2,14 +2,14 @@
 //== This example shows the low level usage of Synchronator ==/
 //===========================================================//
 
-var Synchronator = require("synchronator")
+const Synchronator = require("synchronator")
 
 /**
  * Start with a function that returns either Promise or Synchronator object
  */
 var sleep = function(time) {
-	return new Synchronator(function (resolve, reject) {
-		setTimeout(() => {resolve(time + "ms timed out")}, time)
+	return new Synchronator(function(resolve) {
+		setTimeout(() => {resolve("Sleeping for " + time + " milliseconds")}, time)
 	})
 }
 
