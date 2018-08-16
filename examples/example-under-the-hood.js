@@ -2,7 +2,7 @@
 //== This example shows the low level usage of Synchronator ==/
 //===========================================================//
 
-const Synchronator = require("synchronator")
+var Synchronator = require("synchronator")
 
 /**
  * Start with a function that returns either Promise or Synchronator object

@@ -1,4 +1,8 @@
-const Synchronator = require("synchronator")
+//==================================================================//
+//== This example shows how Synchronator transforms the input code ==/
+//==================================================================//
+
+var Synchronator = require("synchronator")
 
 var code = `
 var fn1 = function*(time)

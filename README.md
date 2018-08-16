@@ -96,7 +96,7 @@ var fn2 = Synchronator.runGenerator(function*()
 Let's add some comments and extra code to see how this code is actually used. You can find this code in the examples.
 
 ```javascript
-const Synchronator = require("synchronator")
+var Synchronator = require("synchronator")
 
 /**
  * Start with a function that returns either Promise or Synchronator object

@@ -1,3 +1,7 @@
+//================================================//
+//== This example shows how to use Synchronator ==/
+//================================================//
+
 // "Synchronator" is already put in the global scope when the module is required and because of that
 // "var Synchronator = " is not mandatory here, but we don't want to hurt someone's feelings
 var Synchronator = require("synchronator")
