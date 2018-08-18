@@ -1,6 +1,6 @@
 {
   "_from": "synchronator",
-  "_id": "synchronator@0.0.3",
+  "_id": "synchronator@0.0.6",
   "_inBundle": false,
   "_integrity": "sha1-mrzMRHx5KsAUR/iTJPky9JUYphU=",
   "_location": "/synchronator",
@@ -19,7 +19,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/synchronator/-/synchronator-0.0.3.tgz",
+  "_resolved": "https://registry.npmjs.org/synchronator/-/synchronator-0.0.6.tgz",
   "_shasum": "9abccc447c792ac01447f89324f932f49518a615",
   "_spec": "synchronator",
   "_where": "S:\\www-node\\Server\\server",
