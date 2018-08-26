@@ -1,5 +1,11 @@
 # Synchronator - PHP-like synchronous code in NodeJS
 
+# Warning
+
+Any rule in this module can be changed, it's a work in progress. I'm using it in my custom framework and if I decide that I should change something for the better, I will.
+
+If you have an opinion about the module, tell me about it in GitHub's Issues. I want to know what people think.
+
 # What is it?
 
 Synchronator is a modules manager where the code in each module can look synchronous and still work asynchronously. There is no callback hell, no Promise hell, no Async-Await hell.
