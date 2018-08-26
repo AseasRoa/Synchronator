@@ -200,11 +200,14 @@ var retval = myCallBackFunction(myArgumentsList, (0));
 
 Place that (0) thing where the callback function should be. (0) means nothing, I just decided to use this as a keyword that tells Synchronator to treat this function in a special way. The real callback function will be executed and it will be decided which of its arguments will be given to **retval**.
 
-- If the callback function has no arguments, **undefined** is returned
-- If the callback function has only 1 argument, that argument is returned
+- If the callback function has no arguments, **undefined** is returned.
+- If the callback function has only 1 argument, that argument is returned.
 - If the callback function has 2 arguments and the first one equals to **null**, the second argument will be returned. The idea is that the first argument is an "error" argument and there is no error, so the second argument is the one that is important.
 - If there are multiple arguments, but the first one is an instance of Error, the first argument is returned.
-- In all other cases all arguments are returned as an object, so you can get any of them like that: var retval = myCallBackFunction(myArgumentsList, (0))**[2]**;
+- In all other cases all arguments are returned as an object, so you can get any of them like that:
+```javascript
+var retval = myCallBackFunction(myArgumentsList, (0))**[2]**;
+```
 
 # new Synchronator() vs new Promise()
 In functions marked with **\*** you can use functions that return Promise as well. In the examples above you can see that **new Synchronator()** was used in the example **sleep** function, but it will work with **new Promise()** as well.
