@@ -184,14 +184,27 @@ startModule.then((exports) => {
 
 This is the **example-modules** example in **/examples**. Try it!
 
+# What the modified **require()** requires?
+
+The priority of the modified **require()** is to find the requested module and synchronate it (transform its code, cache it and return the transformed functions). But the requested module will not be synchronated and will be required using the native **require()** function if there is no evidence that it should be synchronated.
+
+- **require("./mymodule")** - this will synchronate the "mymodule" file
+- **require("mymodule") - this fill try to find a file called "mymodule.js" in the same folder first. If not found, it will search for the module in "node_modules" located in the current folder or in a parent folder. If module is found and the module contains "package.json" file, it search for "synchronator: true" option in it. If this option is not found, the module will be required in the normal way (it will not be synchronated). If the module is a file (not a folder with "package.json"), the file will be synchronated. If still there is no module found, the native require will be called, so that for example **require("http")** will load the built in http module.
+
 # What about regular calback functions?
 Do them like that:
 
 ```javascript
-myCallBackFunction(myArgumentsList, (0));
+var retval = myCallBackFunction(myArgumentsList, (0));
 ```
 
-The key is that (0) as a final argument. It basically means nothing, I just decided to use this as a keyword that tells Synchronator that this is a normal callback function. It will then wrap it with another special function and deal with it. The returned value is pretty much the first non-negative parameter in the actual callback function, so it would choose to return the error or the desired value.
+Place that (0) thing where the callback function should be. (0) means nothing, I just decided to use this as a keyword that tells Synchronator to treat this function in a special way. The real callback function will be executed and it will be decided which of its arguments will be given to **retval**.
+
+- If the callback function has no arguments, **undefined** is returned
+- If the callback function has only 1 argument, that argument is returned
+- If the callback function has 2 arguments and the first one equals to **null**, the second argument will be returned. The idea is that the first argument is an "error" argument and there is no error, so the second argument is the one that is important.
+- If there are multiple arguments, but the first one is an instance of Error, the first argument is returned.
+- In all other cases all arguments are returned as an object, so you can get any of them like that: var retval = myCallBackFunction(myArgumentsList, (0))**[2]**;
 
 # new Synchronator() vs new Promise()
 In functions marked with **\*** you can use functions that return Promise as well. In the examples above you can see that **new Synchronator()** was used in the example **sleep** function, but it will work with **new Promise()** as well.
