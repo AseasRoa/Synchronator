@@ -206,7 +206,7 @@ Place that (0) thing where the callback function should be. (0) means nothing, I
 - If there are multiple arguments, but the first one is an instance of Error, the first argument is returned.
 - In all other cases all arguments are returned as an object, so you can get any of them like that:
 ```javascript
-var retval = myCallBackFunction(myArgumentsList, (0))**[2]**;
+var retval = myCallBackFunction(myArgumentsList, (0))[2]; // that [2] at the end means that the second argument will be returned
 ```
 
 # new Synchronator() vs new Promise()
