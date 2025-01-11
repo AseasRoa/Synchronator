@@ -1,38 +1,22 @@
 {
-  "_from": "synchronator",
-  "_id": "synchronator@0.0.8",
-  "_inBundle": false,
-  "_integrity": "sha1-mrzMRHx5KsAUR/iTJPky9JUYphU=",
-  "_location": "/synchronator",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "synchronator",
-    "name": "synchronator",
-    "escapedName": "synchronator",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/synchronator/-/synchronator-0.0.8.tgz",
-  "_shasum": "9abccc447c792ac01447f89324f932f49518a615",
-  "_spec": "synchronator",
-  "_where": "S:\\www-node\\Server\\server",
+  "name": "synchronator",
+  "version": "0.0.8",
   "author": {
-    "name": "AseasRoa",
-    "email": "aseasroa@yahoo.com"
+    "name": "AseasRoa"
   },
-  "bugs": {
-    "url": "https://github.com/AseasRoa/Synchronator/issues"
+  "description": "",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jasmine"
   },
-  "bundleDependencies": false,
-  "deprecated": false,
-  "description": "Write PHP-like code in NodeJS",
+  "devDependencies": {
+    "jasmine": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AseasRoa/Synchronator.git"
+  },
   "homepage": "https://github.com/AseasRoa/Synchronator",
   "keywords": [
     "synchronous",
@@ -40,12 +24,5 @@
     "await",
     "php"
   ],
-  "license": "MIT",
-  "main": "lib/index.js",
-  "name": "synchronator",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AseasRoa/Synchronator.git"
-  },
-  "version": "0.0.8"
+  "deprecated": false
 }
