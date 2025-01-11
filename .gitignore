@@ -1,0 +1,13 @@
+# Directories
+.idea/
+.vscode/
+coverage/
+dist/
+node_modules/
+
+# Files
+**/.DS_Store
+*.log
+.env*
+package-lock.json
+bun.lockb
